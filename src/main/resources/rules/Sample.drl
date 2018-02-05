@@ -1,0 +1,36 @@
+package com.employers.rules
+ 
+import com.employers.sample.model.Person;
+import com.employers.sample.model.ChildBusPass;
+import com.employers.sample.model.AdultBusPass;
+import com.employers.sample.model.BusPassList;
+ 
+rule "Issue Child Bus Pass" 
+when
+    $p: Person(age < 16)
+then
+    insertLogical(new ChildBusPass($p));
+end
+
+rule "Issue Adult Bus Pass" 
+when
+    $p : Person(age >= 16)
+then
+    insertLogical(new AdultBusPass($p));
+end
+
+rule "Collect Child Bus Passes" 
+    salience -1
+when
+    $cbp: ChildBusPass()
+then
+    BusPassList.childBusPassList.add($cbp);
+end
+
+rule "Collect Adult Bus Passes"
+    salience -1 
+when
+    $abp: AdultBusPass()
+then
+    BusPassList.adultBusPassList.add($abp);
+end

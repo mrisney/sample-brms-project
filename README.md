@@ -1,0 +1,1 @@
+This project will the BRMS rule assests executed by the Employers rules service. Initially the project will only contain sample rules and tests.
